@@ -8,9 +8,6 @@ const URL_BASE = "https://api.thedogapi.com/v1/breeds/search";
 
 const contDogsByName = async (name) => {
   try {
-    // if (!name) {
-    //   return null;
-    // }
     name = name.toLowerCase();
     //Buscamos en BDD
 

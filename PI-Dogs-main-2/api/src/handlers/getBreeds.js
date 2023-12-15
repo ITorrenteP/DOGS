@@ -9,7 +9,7 @@ const getBreeds = async (req, res) => {
     const response = await axios.get(`${URL_BASE}?api_key=${API_KEY}`);
     const dogNames = response.data.map((dog) => ({
       name: dog.name,
-      image: dog.image.url,
+      // image: dog.image.url,
     }));
 
     res.status(200).json(dogNames);
