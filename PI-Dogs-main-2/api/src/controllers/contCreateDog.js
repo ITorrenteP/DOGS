@@ -6,7 +6,8 @@ const constCreateDog = async (name, id, height, life_span, image) => {
     // console.log(newDog);
     return newDog;
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    // res.status(400).json({ error: error.message });
+    throw error;
   }
 };
 

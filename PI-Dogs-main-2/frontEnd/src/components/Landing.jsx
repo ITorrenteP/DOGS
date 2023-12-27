@@ -2,7 +2,7 @@ function Landing() {
     return (
         <div>
             <h1>Welcome to the Dogs App</h1>
-            <h3>Created by Isabella Torrente</h3>
+            <h4>Created by Isabella Torrente</h4>
         </div>
     )
 

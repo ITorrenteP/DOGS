@@ -43,12 +43,16 @@ const contDogsByName = async (name) => {
         id: dbDog.id,
         name: dbDog.name,
         temperament: dbDog.temperament || null,
+        weight: dbDog.weight,
+        image: dbDog.image,
         // Include other properties as needed from the database
       })),
       ...dogsApi.map((apiDog) => ({
         id: apiDog.id,
         name: apiDog.name,
-        temperament: apiDog.temperament || null,
+        temperaments: apiDog.temperament,
+        weight: apiDog.weight.metric,
+        image: apiDog.image.url,
         // Include other properties as needed from the API
       })),
     ];

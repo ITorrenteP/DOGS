@@ -1,1 +1,2 @@
 export const GET_ALL_DOGS = "GET_ALL_DOGS";
+export const SEARCH_DOGS_BY_NAME = "SEARCH_DOGS_BY_NAME";

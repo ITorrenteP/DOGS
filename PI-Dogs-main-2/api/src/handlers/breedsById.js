@@ -19,6 +19,7 @@ const breedsById = async (req, res) => {
         reference_image_id,
         image,
         height,
+        weight,
         life_span,
         temperament,
       } = dogsIdDataBase;
@@ -27,6 +28,7 @@ const breedsById = async (req, res) => {
         id,
         name,
         height,
+        weight,
         life_span,
         temperament,
         reference_image_id,
@@ -39,7 +41,7 @@ const breedsById = async (req, res) => {
     const response = await axios.get(`${URL_BASE}?api_key=${API_KEY}`);
 
     const result = response.data.filter((elem) => elem.id === Number(id));
-    console.log(result);
+    // console.log(result);
 
     if (result.length > 0) {
       const {
@@ -48,6 +50,7 @@ const breedsById = async (req, res) => {
         reference_image_id,
         image,
         height,
+        weight,
         life_span,
         temperament,
       } = result[0];
@@ -55,12 +58,16 @@ const breedsById = async (req, res) => {
       const dog = {
         id,
         name,
-        height,
+        height: height.metric,
+        weight: weight.metric,
         life_span,
         temperament,
         reference_image_id,
-        image,
+        image: image.url,
       };
+
+      // console.log(dog);
+
       return res.status(200).json(dog);
     } else {
       return res.status(404).send("Id not found");

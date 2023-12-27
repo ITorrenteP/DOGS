@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 const Card = ({name, image, id, temperaments, weight}) => {
+    
     
 
     const imageStyle = {
@@ -9,12 +12,14 @@ const Card = ({name, image, id, temperaments, weight}) => {
       };
     
       return(
-        <div>
+            <div>
+            <Link to={`detail/${id}`}>
             <h2>{name}</h2>
+            </Link>
             <h2>Temperaments: {temperaments}</h2>
             <h2>Weight: {weight} Kg</h2>
-            <img src={image} alt={name} style={imageStyle}/>
-        </div>
+            <img src={image} alt={name} style={imageStyle}/> 
+            </div>         
     )
 }
 
