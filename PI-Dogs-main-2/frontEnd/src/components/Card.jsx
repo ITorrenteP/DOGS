@@ -12,7 +12,12 @@ const Card = ({name, image, id, temperaments, weight}) => {
       };
     
       return(
+            
             <div>
+            {/* {
+            <button onClick={() => onClose(id)}>X</button>
+            } */}
+
             <Link to={`detail/${id}`}>
             <h2>{name}</h2>
             </Link>

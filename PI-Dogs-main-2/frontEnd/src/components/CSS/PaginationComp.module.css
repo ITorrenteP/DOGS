@@ -1,5 +1,37 @@
 .pagination {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.pagination button {
+    width: 40px;
+    height: 40px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: #eee;
+    border-color: #eee;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination button.active {
+    font-weight: 900;
+    border-color: #101010;
+    background: #e3a8d6;
+    color: #101010;
+}
+
+/* .pagination {
+    display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
@@ -20,17 +52,17 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+  } */
   
   /* Add styles for the active page */
-  .page-link.active {
+  /* .page-link.active {
     background-color: #007bff;
     color: #fff;
   }
   
   .page-link:hover {
     background-color: #ddd;
-  }
+  } */
   
   /* Add styling for separation between page numbers */
   /* .page-number {

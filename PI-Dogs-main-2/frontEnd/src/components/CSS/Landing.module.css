@@ -1,0 +1,12 @@
+.landingcontainer {
+    background-image: url('https://media.istockphoto.com/id/918196260/es/vector/patrón-sin-fisuras-con-los-huesos-para-el-perro-sobre-el-fondo-rosa.jpg?s=612x612&w=is&k=20&c=pWupWeOpDFj0L9aezyquMh1CEIkNdp7_f0S6SywiSaM='); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Adjust the height as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Set text color to make it readable on the background */
+  }

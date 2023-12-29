@@ -3,9 +3,17 @@ const { Dog, Temperament, sequelize } = require("../db");
 
 const createDog = async (req, res) => {
   try {
-    const { name, id, height, life_span, image, temperament } = req.body;
+    const { name, id, height, weight, life_span, image, temperament } =
+      req.body;
     // console.log(req.body);
-    const newDog = await constCreateDog(name, id, height, life_span, image);
+    const newDog = await constCreateDog(
+      name,
+      id,
+      height,
+      weight,
+      life_span,
+      image
+    );
 
     if (temperament && temperament.length > 0) {
       const temperamentIds = await Temperament.findAll({

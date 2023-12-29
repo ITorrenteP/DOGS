@@ -1,24 +1,29 @@
+import React from 'react';
 import styles from './CSS/PaginationComp.module.css'
 
-const Pagination = ({ dogsPerPage, totalDogs, paginate }) => {
-    const pageNumbers = [];
+
+const Pagination = ({ totalDogs, postsPerPage, setCurrentPage, currentPage }) => {
+    let pages = []
   
-    for (let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
-      pageNumbers.push(i);
+    for (let i = 1; i <= Math.ceil(totalDogs / postsPerPage); i++) {
+      pages.push(i);
     }
   
     return (
-      <nav>
-        <ul className={styles.pagination}>
-          {pageNumbers.map((number) => (
-            <li key={number} className={styles.pageItem}>
-              <a onClick={() => paginate(number)} href="#" className={styles.pageLink}>
-                {number}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      
+        <div className={styles.pagination}>
+          {pages.map((page, index) => {
+            return (
+                <button
+                key={index}
+                onClick={() => setCurrentPage(page)}
+                className={page === currentPage ? styles.active : ""}
+                >
+                {page}    
+                </button>
+            )
+          })}
+        </div>
     );
   };
   

@@ -1,8 +1,9 @@
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 
 const Detail = () => {
+    const navigate = useNavigate()
 
     const imageStyle = {
         width: "60%", // Make sure the image takes up 100% of the container's width
@@ -16,6 +17,10 @@ const Detail = () => {
     const [dog, setDog] = useState({})
 
     const URL_BASE = "http://localhost:3001/dogs/"
+
+    const onClose = () => {
+        navigate(-1)
+      };
     
     useEffect(() => {
         axios(`${URL_BASE}${id}`).then(({data}) => setDog(data))
@@ -26,8 +31,12 @@ const Detail = () => {
         {
            dog ? (
             <div>
-                <h4>Id: {dog.id}</h4>
-                <h2>Name: {dog.name}</h2>
+
+                    {
+                    <button onClick={onClose}>X</button>
+                    }
+                    <h4>Id: {dog.id}</h4>
+                    <h2>Name: {dog.name}</h2>
                     <h4>Height: {dog.height} </h4>
                     <h4>Weight: {dog.weight} </h4>
                     <h4>Temperaments: {dog.temperament} </h4>
