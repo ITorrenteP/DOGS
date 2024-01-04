@@ -4,14 +4,19 @@ import {
   ORDER,
   ORDER_BY_WEIGHT,
   FILTER_BY_TEMPERAMENT,
-  SELECT_TEMPERAMENT,
   GET_ALL_TEMPERAMENTS,
+  FILTER_BY_SOURCE,
+  DOGS_BY_ID,
+  CREATE_DOG,
+  SET_CURRENT_PAGE,
 } from "./actionTypes";
 
 const initialState = {
   allBreeds: [],
+  allBreedsCopy: [],
   allTemperaments: [],
-  selectedTemperament: null,
+  dogInfo: [],
+  currentPage: 1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,17 +25,30 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allBreeds: action.payload,
+        allBreedsCopy: action.payload,
       };
     case SEARCH_DOGS_BY_NAME:
       return {
         ...state,
         allBreeds: action.payload,
-        // selectedTemperament: null,
+        allBreedsCopy: action.payload,
+      };
+    case DOGS_BY_ID:
+      return {
+        ...state,
+        dogInfo: action.payload,
       };
     case GET_ALL_TEMPERAMENTS:
       return {
         ...state,
         allTemperaments: action.payload.temperaments,
+      };
+    case CREATE_DOG:
+      const updatedAllBreedsCopy = [...state.allBreedsCopy, action.payload];
+      return {
+        ...state,
+        allBreeds: [...state.allBreeds, action.payload],
+        allBreedsCopy: updatedAllBreedsCopy,
       };
     case ORDER:
       const orderDogs = [...state.allBreeds].sort((a, b) => {
@@ -45,31 +63,35 @@ const reducer = (state = initialState, action) => {
         ...state,
         allBreeds: orderDogs,
       };
-    case SELECT_TEMPERAMENT:
-      return {
-        ...state,
-        selectedTemperament: action.payload,
-      };
     case FILTER_BY_TEMPERAMENT:
-      console.log("Before Filtering - allBreeds:", state.allBreeds);
-      console.log("Selected Temperament:", state.selectedTemperament);
-      const filteredDogs = state.allBreeds.filter((dog) => {
-        console.log("Dog Temperament:", dog.temperament);
+      // console.log("Filter By Temperament Payload:", action.payload);
+      const updatedBreeds = state.allBreedsCopy.length
+        ? state.allBreedsCopy
+        : state.allBreeds;
 
-        if (dog.temperament === undefined) {
-          console.log("Undefined temperament for dog:", dog);
+      const filteredTemperaments = updatedBreeds.filter((dog) => {
+        if (typeof dog.temperaments === "string") {
+          const dogTemperamentsArray = dog.temperaments
+            .split(",")
+            .map((t) => t.trim());
+
+          const includesTemperament = dogTemperamentsArray.includes(
+            action.payload
+          );
+
+          const result = action.payload === "all" || includesTemperament;
+
+          return result;
         }
 
-        return (
-          // !state.selectedTemperament ||
-          // state.selectedTemperament === "" ||
-          dog.temperament.includes(state.selectedTemperament)
-        );
+        return action.payload === "all";
       });
-      console.log("Filtered Dogs:", filteredDogs);
+
       return {
         ...state,
-        allBreeds: filteredDogs,
+        allBreeds:
+          action.payload === "all" ? updatedBreeds : filteredTemperaments,
+        allBreedsCopy: updatedBreeds,
       };
     case ORDER_BY_WEIGHT:
       const orderWeight = [...state.allBreeds].sort((a, b) => {
@@ -96,6 +118,35 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allBreeds: orderWeight,
+      };
+    case FILTER_BY_SOURCE:
+      const updatedBreedsSource = state.allBreedsCopy.length
+        ? state.allBreedsCopy
+        : state.allBreeds;
+
+      const filteredBySource = updatedBreedsSource.filter((dog) => {
+        const hasSourceProperty = Object.prototype.hasOwnProperty.call(
+          dog,
+          "source"
+        );
+
+        if (action.payload === "database") {
+          return hasSourceProperty;
+        } else if (action.payload === "api") {
+          return !hasSourceProperty;
+        } else {
+          return true;
+        }
+      });
+      return {
+        ...state,
+        allBreeds: filteredBySource,
+        allBreedsCopy: updatedBreedsSource,
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       };
     default:
       return { ...state };

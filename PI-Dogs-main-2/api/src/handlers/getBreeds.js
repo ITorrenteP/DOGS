@@ -16,9 +16,22 @@ const getBreeds = async (req, res) => {
       weight: dog.weight.metric,
     }));
 
-    const databaseDogNames = await Dog.findAll();
+    const databaseDogNames = await Dog.findAll({
+      include: {
+        model: Temperament,
+        atributes: ["name"],
+      },
+    });
 
-    const allDogNames = [...apiDogNames, ...databaseDogNames];
+    // console.log(databaseDogNames);
+
+    const dataBaseWithSource = databaseDogNames.map((databaseDog) => ({
+      ...databaseDog.dataValues,
+      source: "database",
+      temperaments: databaseDog.temperaments.map((t) => t.name).join(", "),
+    }));
+
+    const allDogNames = [...apiDogNames, ...dataBaseWithSource];
     // console.log(allDogNames);
 
     res.status(200).json(allDogNames);

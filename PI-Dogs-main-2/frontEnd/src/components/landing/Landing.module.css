@@ -1,0 +1,48 @@
+body { 
+    background: url('https://png.pngtree.com/background/20210716/original/pngtree-cute-dog-tiled-background-bone-claw-print-picture-image_1349644.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #38312b;
+    font-family: Verdana, sans-serif;
+}
+
+ 
+.title {
+    font-family: Verdana, sans-serif;
+    font-size: 6.5em;
+    margin-bottom: 0;
+}  
+
+.landingContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('https://png.pngtree.com/background/20210716/original/pngtree-cute-dog-tiled-background-bone-claw-print-picture-image_1349644.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #453a32;
+    font-family: Verdana, sans-serif;
+    /* height: 100vh; /* This will make the container fill the viewport */
+    /* width: 100vw; */
+  }
+
+
+
+/* html { 
+    background: url('https://png.pngtree.com/background/20210716/original/pngtree-cute-dog-tiled-background-bone-claw-print-picture-image_1349644.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  } */
+
+/* html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} */

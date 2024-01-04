@@ -3,16 +3,15 @@ const { Dog, Temperament, sequelize } = require("../db");
 
 const createDog = async (req, res) => {
   try {
-    const { name, id, height, weight, life_span, image, temperament } =
-      req.body;
-    // console.log(req.body);
+    const { name, height, weight, life_span, image, temperament } = req.body;
+
     const newDog = await constCreateDog(
       name,
-      id,
       height,
       weight,
       life_span,
-      image
+      image,
+      temperament
     );
 
     if (temperament && temperament.length > 0) {
@@ -23,10 +22,8 @@ const createDog = async (req, res) => {
         attributes: ["id"],
       });
 
-      // Extract temperament IDs from the result
       const ids = temperamentIds.map((temp) => temp.id);
 
-      // Associate the dog with the specified temperaments
       await newDog.setTemperaments(ids);
     }
 

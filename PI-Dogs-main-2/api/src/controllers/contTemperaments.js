@@ -48,36 +48,6 @@ const contTemperaments = async () => {
       return newTemperaments;
     }
 
-    // const promises = [];
-
-    // for (const entry of dataApi) {
-    //   const { temperament } = entry;
-
-    //   // Check if temperament is defined
-    //   if (temperament) {
-    //     const terms = temperament.split(",").map((term) => term.trim());
-
-    //     terms.forEach((term) => {
-    //       promises.push(
-    //         Temperament.findOrCreate({
-    //           where: { name: term },
-    //         })
-    //       );
-    //     });
-    //   }
-    // }
-
-    // // Wait for all promises to complete
-    // const results = await Promise.all(promises);
-
-    // console.log("Finished creating or finding temperaments.");
-
-    // // Extract created temperaments from the results
-    // const createdTemperaments = results.map(([foundTemperament, created]) => ({
-    //   name: foundTemperament.name,
-    //   created,
-    // }));
-
     // return createdTemperaments;
   } catch (error) {
     console.error("Error in contTemperaments:", error);

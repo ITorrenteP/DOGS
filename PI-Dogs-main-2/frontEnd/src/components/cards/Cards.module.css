@@ -1,0 +1,28 @@
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.create-breed-button {
+    margin-top: -50px;
+    margin-bottom: 20px;
+    padding: 20px 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: #584e44; /* Dark Brown */
+    color: #f0f0f0; /* Light Gray */
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.create-breed-button:hover {
+    background-color: #7f8c8d; /* Gray */
+    color: #f0f0f0; /* Light Gray */
+}
+
+.top {
+    display: flex;
+    justify-content: flex-end;
+}

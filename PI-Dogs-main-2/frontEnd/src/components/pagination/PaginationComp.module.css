@@ -16,8 +16,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
     background: transparent;
-    color: #eee;
-    border-color: #eee;
+    color: #38312b; /* Dark Brown */
+    border-color: #38312b; /* Dark Brown */
     display: flex;
   align-items: center;
   justify-content: center;
@@ -25,9 +25,9 @@
 
 .pagination button.active {
     font-weight: 900;
-    border-color: #101010;
-    background: #e3a8d6;
-    color: #101010;
+    border-color: #7f8c8d; /* Gray */
+    background: #645d48; /* Gray */
+    color: #ffffff;
 }
 
 /* .pagination {

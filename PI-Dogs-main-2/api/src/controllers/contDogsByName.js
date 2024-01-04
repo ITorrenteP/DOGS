@@ -17,12 +17,11 @@ const contDogsByName = async (name) => {
           [Op.iLike]: `%${name}%`,
         },
       },
-      include: [Temperament],
+      include: {
+        model: Temperament,
+        atributes: ["name"],
+      },
     });
-
-    // if (dogsDataBase.length) {
-    //   return dogsDataBase;
-    // }
 
     // Buscamos en API
     const response = await axios.get(
@@ -30,19 +29,13 @@ const contDogsByName = async (name) => {
     );
 
     const dogsApi = response.data;
-    // console.log(dogsApi);
-
-    // // Si no encontramos en la API, retornamos null
-    // if (dogsApi.length === 0) {
-    //   return null;
-    // }
 
     // Combinamos datos de la API y la base de datos
     const combinedData = [
       ...dogsDataBase.map((dbDog) => ({
         id: dbDog.id,
         name: dbDog.name,
-        temperament: dbDog.temperament || null,
+        temperaments: dbDog.temperaments.map((t) => t.name).join(", "),
         weight: dbDog.weight,
         image: dbDog.image,
         // Include other properties as needed from the database

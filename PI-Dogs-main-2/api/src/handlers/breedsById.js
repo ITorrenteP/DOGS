@@ -12,7 +12,6 @@ const breedsById = async (req, res) => {
     const dogsIdDataBase = await findDogsByIdDataBase(id);
 
     if (dogsIdDataBase) {
-      // If found in the database, return the result
       const {
         id,
         name,
@@ -21,8 +20,10 @@ const breedsById = async (req, res) => {
         height,
         weight,
         life_span,
-        temperament,
+        temperaments,
       } = dogsIdDataBase;
+
+      const temperamentNames = temperaments.map((temp) => temp.name).join(", ");
 
       const dog = {
         id,
@@ -30,7 +31,7 @@ const breedsById = async (req, res) => {
         height,
         weight,
         life_span,
-        temperament,
+        temperament: temperamentNames,
         reference_image_id,
         image,
       };
@@ -41,7 +42,6 @@ const breedsById = async (req, res) => {
     const response = await axios.get(`${URL_BASE}?api_key=${API_KEY}`);
 
     const result = response.data.filter((elem) => elem.id === Number(id));
-    // console.log(result);
 
     if (result.length > 0) {
       const {
@@ -65,8 +65,6 @@ const breedsById = async (req, res) => {
         reference_image_id,
         image: image.url,
       };
-
-      // console.log(dog);
 
       return res.status(200).json(dog);
     } else {

@@ -1,11 +1,11 @@
 import './App.css'
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom"
 import { dogsByName } from './redux/actions'
-import Landing from './components/landing'
-import Cards from './components/Cards'
-import Nav from './components/Nav'
-import Detail from './components/Detail'
-import CreateDog from './components/Form'
+import Landing from './components/landing/Landing'
+import Cards from './components/cards/Cards'
+import Nav from './components/nav/Nav'
+import Detail from './components/detail/Detail'
+import CreateDog from './components/form/Form'
 
 
 
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-       {location.pathname === "/landing"  && (<Nav />)}
+       {/* {location.pathname === "/landing"  && (<Nav />)} */}
       <Routes>
         <Route path='/landing' element={<Landing/>} />
         <Route path='/' element={<Cards />} />
