@@ -9,7 +9,7 @@ const Card = ({name, image, id, temperaments, weight}) => {
             
             <div className={styles.card}>
 
-            <Link to={`detail/${id}`} className={styles.link}>
+            <Link to={`/detail/${id}`} className={styles.link}>
             <h2>{name}</h2>
             </Link>
             <h2>Temperaments: {temperaments}</h2>

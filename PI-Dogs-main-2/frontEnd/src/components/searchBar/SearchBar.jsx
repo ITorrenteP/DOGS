@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs, dogsByName, setCurrentPage } from "../../redux/actions";
 import styles from "./SearchBar.module.css";
 
@@ -8,26 +8,33 @@ function SearchBar() {
     const dispatch = useDispatch()
 
     const [searchTerm, setSearchTerm] = useState('')
+    const error = useSelector(state => state.error)
 
-    const handleSearch = () => {
+    useEffect(()=>{
+      if (error) {
+        alert(error)
+      }
+    }, [error])
+
+    const handleSearch = async () => {
         if (!searchTerm) {
           alert('Please enter a breed')
+          return;
         }
         
-
         if (searchTerm.trim() !== '') {
-          const info = dispatch(dogsByName(searchTerm));
-          if (!info.includes(searchTerm)) {
-            
-            alert('Breed not found')
-          }
+          await dispatch(dogsByName(searchTerm));
           setSearchTerm('');
           dispatch(setCurrentPage(1))
         }
     };
+
+    const handleClear = () => {
+      setSearchTerm('');
+      dispatch(getAllDogs());
+      dispatch(setCurrentPage(1));
+    };
    
-
-
     return (
         <div className={styles['search-bar']}>
             <input
@@ -38,6 +45,7 @@ function SearchBar() {
               className={styles['search-bar-input']}
             />
             <button onClick={handleSearch} className={styles['search-bar-button']}>Search</button>
+            <button onClick={handleClear} >Clear</button>
         </div>
     )
 }

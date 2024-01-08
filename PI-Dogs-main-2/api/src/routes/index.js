@@ -3,6 +3,7 @@ const getBreeds = require("../handlers/getBreeds");
 const breedsById = require("../handlers/breedsById");
 const dogsByName = require("../handlers/dogsByName");
 const createDog = require("../handlers/createDog");
+const deleteDog = require("../handlers/deleteDog");
 const getTemperaments = require("../handlers/getTemperaments");
 
 // Importar todos los routers;
@@ -14,6 +15,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.post("/dogs", createDog);
+router.delete("/dogs/:id", deleteDog);
 
 router.get("/temperaments", getTemperaments);
 

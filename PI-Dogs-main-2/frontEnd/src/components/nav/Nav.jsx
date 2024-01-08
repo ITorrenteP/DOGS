@@ -6,7 +6,7 @@ import styles from "./Nav.module.css";
 function Nav () {
     return(
         <div className="nav-container">
-            <NavLink to="/">
+            <NavLink to="/home">
                 <button className={styles.button}>HOME</button>
             </NavLink>
             

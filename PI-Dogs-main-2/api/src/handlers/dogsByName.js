@@ -12,7 +12,7 @@ const dogsByName = async (req, res) => {
     const response = await contDogsByName(name);
 
     if (!response.length) {
-      return res.status(404).send(`Breed not found with name ${name}`);
+      return res.status(404).json(`Breed not found with name ${name}`);
     } else {
       return res.status(200).json(response);
     }

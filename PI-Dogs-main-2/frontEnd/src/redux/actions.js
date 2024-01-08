@@ -9,6 +9,8 @@ import {
   DOGS_BY_ID,
   CREATE_DOG,
   SET_CURRENT_PAGE,
+  DOG_NOT_FOUND,
+  DELETE_DOG,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -48,20 +50,20 @@ export const getAllTemperaments = () => {
 export const dogsByName = (name) => {
   return async (dispatch) => {
     try {
-      if (!name) {
-        throw new Error("Enter a breed");
-      }
-
       const { data } = await axios(`${URL_BASE}/dogs/name?name=${name}`);
-      if (!data.length) {
-        alert("Breed not found");
-      }
       return dispatch({
         type: SEARCH_DOGS_BY_NAME,
         payload: data,
       });
     } catch (error) {
-      console.log(error);
+      if (error.response.data.startsWith("Breed not found with name")) {
+        return dispatch({
+          type: DOG_NOT_FOUND,
+          payload: error.response.data,
+        });
+      } else {
+        console.log(error);
+      }
     }
   };
 };
@@ -70,7 +72,7 @@ export const dogsById = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(`${URL_BASE}/dogs/${id}`);
-      // console.log(data);
+      console.log(data);
       return dispatch({
         type: DOGS_BY_ID,
         payload: data,
@@ -128,5 +130,21 @@ export const setCurrentPage = (page) => {
   return {
     type: SET_CURRENT_PAGE,
     payload: page,
+  };
+};
+
+export const deleteDog = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`${URL_BASE}/dogs/${id}`);
+      if (response.status === 200) {
+        return dispatch({
+          type: DELETE_DOG,
+          payload: id,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

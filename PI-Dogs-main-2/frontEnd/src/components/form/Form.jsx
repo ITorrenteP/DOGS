@@ -6,7 +6,7 @@ import styles from "./Form.module.css"
 const CreateDog = () => {
 
     const [input, setInput] = useState({
-        id:"",
+        // id:"",
         name:"",
         minHeight:"",
         maxHeight:"",
@@ -87,7 +87,7 @@ const CreateDog = () => {
             temperament:[],
             life_span:"",
             image: "",
-            id: "",
+            // id: "",
         })
     }
 
@@ -102,10 +102,10 @@ const CreateDog = () => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.div}>
+            {/* <div className={styles.div}>
                 <label htmlFor="id" className={styles.label}>Id </label>
                 <input type="id" name="id" value={input.id} onChange={handleChange}/>
-            </div>
+            </div> */}
             <div>
                 <label htmlFor="name" className={styles.label}>Name </label>
                 <input type="text" name="name" value={input.name} onChange={handleChange}/>

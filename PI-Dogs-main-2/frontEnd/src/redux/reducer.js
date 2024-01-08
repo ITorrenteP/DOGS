@@ -9,6 +9,8 @@ import {
   DOGS_BY_ID,
   CREATE_DOG,
   SET_CURRENT_PAGE,
+  DOG_NOT_FOUND,
+  DELETE_DOG,
 } from "./actionTypes";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   allTemperaments: [],
   dogInfo: [],
   currentPage: 1,
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +35,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         allBreeds: action.payload,
         allBreedsCopy: action.payload,
+      };
+    case DOG_NOT_FOUND:
+      return {
+        ...state,
+        error: action.payload,
       };
     case DOGS_BY_ID:
       return {
@@ -147,6 +155,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentPage: action.payload,
+      };
+    case DELETE_DOG:
+      const updatedBreedsDel = state.allBreeds.filter(
+        (dog) => dog.id !== action.payload
+      );
+      const updatedBreedsCopyDel = state.allBreedsCopy.filter(
+        (dog) => dog.id !== action.payload
+      );
+      return {
+        ...state,
+        allBreeds: updatedBreedsDel,
+        allBreedsCopy: updatedBreedsCopyDel,
       };
     default:
       return { ...state };

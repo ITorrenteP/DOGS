@@ -1,6 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
 const { API_KEY } = process.env;
+const { validate: isUuid } = require("uuid");
 const findDogsByIdDataBase = require("../controllers/contDogsById");
 
 const URL_BASE = "https://api.thedogapi.com/v1/breeds/";
@@ -9,39 +10,46 @@ const breedsById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const dogsIdDataBase = await findDogsByIdDataBase(id);
+    if (isUuid(id)) {
+      const dogsIdDataBase = await findDogsByIdDataBase(id);
 
-    if (dogsIdDataBase) {
-      const {
-        id,
-        name,
-        reference_image_id,
-        image,
-        height,
-        weight,
-        life_span,
-        temperaments,
-      } = dogsIdDataBase;
+      if (dogsIdDataBase) {
+        const {
+          id,
+          name,
+          reference_image_id,
+          image,
+          height,
+          weight,
+          life_span,
+          temperaments,
+        } = dogsIdDataBase;
 
-      const temperamentNames = temperaments.map((temp) => temp.name).join(", ");
+        const temperamentNames = temperaments
+          .map((temp) => temp.name)
+          .join(", ");
 
-      const dog = {
-        id,
-        name,
-        height,
-        weight,
-        life_span,
-        temperament: temperamentNames,
-        reference_image_id,
-        image,
-      };
+        const dog = {
+          id,
+          name,
+          height,
+          weight,
+          life_span,
+          temperament: temperamentNames,
+          reference_image_id,
+          image,
+        };
 
-      return res.status(200).json(dog);
+        return res.status(200).json(dog);
+      }
     }
 
     const response = await axios.get(`${URL_BASE}?api_key=${API_KEY}`);
+    // console.log(response.data);
 
-    const result = response.data.filter((elem) => elem.id === Number(id));
+    // const result = response.data.filter((elem) => elem.id === Number(id));
+    const result = response.data.filter((elem) => String(elem.id) === id);
+    // console.log(result);
 
     if (result.length > 0) {
       const {

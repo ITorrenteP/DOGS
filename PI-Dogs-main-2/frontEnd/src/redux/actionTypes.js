@@ -9,3 +9,5 @@ export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
 export const DOGS_BY_ID = "DOGS_BY_ID";
 export const CREATE_DOG = "CREATE_DOG";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const DOG_NOT_FOUND = "DOG_NOT_FOUND";
+export const DELETE_DOG = "DELETE_DOG";

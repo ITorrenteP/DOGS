@@ -9,9 +9,9 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true,
-        // autoIncrement: true,
+        autoIncrement: true,
       },
       image: {
         // type: DataTypes.BLOB,
